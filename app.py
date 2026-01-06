@@ -8,10 +8,12 @@ from langchain_core.prompts import ChatPromptTemplate
 from tenacity import retry, wait_exponential, stop_after_attempt
 from openai import RateLimitError
 from dotenv import load_dotenv
+from flask_cors import CORS
 from src.prompt import *
 import os
-
+                                                                                                                                                            
 app = Flask(__name__)
+CORS(app)
 
 load_dotenv()
 
