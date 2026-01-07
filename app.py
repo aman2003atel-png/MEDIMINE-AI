@@ -79,6 +79,40 @@ def chat():
     print("Response : ", response["answer"])
     return str(response["answer"])
 
+# This api rote for react native application and work on json data format
+# @app.route("/api/mobile_chat", methods=["POST"])
+# def mobile_chat():
+#     data = request.get_json()
+
+#     if not data or "message" not in data:
+#         return jsonify({"error": "Message is required"}), 400
+
+#     user_message = data["message"]
+#     response = run_rag(user_message)
+    
+    
+
+#     return jsonify({
+#         "question": user_message,
+#         "answer": response["answer"]
+#     })
+
+# This api rote for react native application and work on plain text format
+@app.route("/api/mobile_chat", methods=["POST"])
+def mobile_chat():
+    data = request.get_json()
+
+    user_message = data.get("message") or data.get("msg")
+
+    if not user_message:
+        return jsonify({"error": "Message is required"}), 400
+
+    response = run_rag(user_message)
+
+    return jsonify({
+        "answer": response["answer"]
+    })
+    
  
 
 @app.route("/")
